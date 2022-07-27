@@ -13,7 +13,7 @@ CREATE TABLE products (
   default_price INT NOT NULL
 );
 
-COPY "products" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview-Service/data/products.csv' DELIMITER ',' CSV HEADER ;
+COPY "products" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/products.csv' DELIMITER ',' CSV HEADER ;
 
 
 
@@ -28,7 +28,7 @@ CREATE TABLE features (
   value VArCHAR(250) NOT NULL
 );
 
-COPY "features" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview-Service/data/features.csv' DELIMITER ',' CSV HEADER ;
+COPY "features" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/features.csv' DELIMITER ',' CSV HEADER ;
 
 
 
@@ -43,7 +43,7 @@ CREATE TABLE skus (
   quantity INT NOT NULL
 );
 
-COPY "skus" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview-Service/data/skus.csv' DELIMITER ',' CSV HEADER ;
+COPY "skus" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/skus.csv' DELIMITER ',' CSV HEADER ;
 
 
 
@@ -60,4 +60,21 @@ CREATE TABLE styles (
   default_price INT NOT NULL
 );
 
-COPY "styles" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview-Service/data/styles.csv' DELIMITER ',' CSV HEADER ;
+COPY "styles" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/styles.csv' DELIMITER ',' CSV HEADER ;
+
+
+
+DROP TABLE IF EXISTS photos;
+
+--id,styleId,url,thumbnail_url
+
+CREATE TABLE photos (
+  id INT NOT NUll,
+  styleId INT NOT NULL,
+  url text,
+  thumbnail_url text
+);
+
+-- SELECT * FROM photos;
+
+COPY "photos" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/photos.csv' DELIMITER ',' CSV HEADER ;
