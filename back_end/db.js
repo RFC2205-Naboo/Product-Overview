@@ -16,10 +16,10 @@ const db = Promise.promisifyAll(client, {multiArgs: true});
 //connects to DB
 db.connectAsync()
   .then(()=>{
-    console.log('connected to PostgreSQL DB successful')
+    console.log('connection to PostgreSQL DB successful')
   })
   .catch((err)=>{
-    console.log('failed to connect: ', err)
+    console.log('failed to connect to DB: ', err)
   });
 
 //exports
