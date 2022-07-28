@@ -15,6 +15,11 @@ CREATE TABLE products (
 
 COPY "products" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/products.csv' DELIMITER ',' CSV HEADER ;
 
+--CREATE INDEX name ON table
+
+CREATE INDEX id ON products (id);
+
+
 
 
 DROP TABLE IF EXISTS features;
@@ -29,6 +34,8 @@ CREATE TABLE features (
 );
 
 COPY "features" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/features.csv' DELIMITER ',' CSV HEADER ;
+
+CREATE INDEX product_id ON features (product_id);
 
 
 
@@ -45,6 +52,7 @@ CREATE TABLE skus (
 
 COPY "skus" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/skus.csv' DELIMITER ',' CSV HEADER ;
 
+CREATE INDEX styleId ON skus (styleId);
 
 
 DROP TABLE IF EXISTS styles;
@@ -62,6 +70,7 @@ CREATE TABLE styles (
 
 COPY "styles" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/styles.csv' DELIMITER ',' CSV HEADER ;
 
+CREATE INDEX productId ON styles (productId);
 
 
 DROP TABLE IF EXISTS photos;
@@ -78,3 +87,5 @@ CREATE TABLE photos (
 -- SELECT * FROM photos;
 
 COPY "photos" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/photos.csv' DELIMITER ',' CSV HEADER ;
+
+CREATE INDEX style_id ON photos (styleId);
