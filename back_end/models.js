@@ -15,12 +15,13 @@ exports.retrieveProducts = (count, page) => {
 }
 
 //query's to find a product by id
-exports.retrieveProductById = () => {
-
+exports.retrieveProductById = (id) => {
+  id = id || 1;
+  return db.queryAsync(`SELECT * FROM products WHERE id = $1`, [id])
 }
 
 //query's to find a products styles by id
-exports.retrieveStylesByProductId = () => {
-
+exports.retrieveStylesByProductId = (id) => {
+  return db.query(`SELECT * FROM styles WHERE productId = $1`, [id])
 }
 

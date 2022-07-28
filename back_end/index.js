@@ -22,13 +22,14 @@ app.use(express.json());
 //ROUTES:
 
 //GET /products
-app.get('/products', controls.getAllProducts)
+app.get('/products', controls.getProducts)
 
 // // GET /products/:product_id
 // app.get('/products/:product_id', controls.getProductById)
+app.get('/products/*', controls.getProductById)
 
 // // GET /products/:product_id/styles
-// app.get('/products/:products_id/style', contorls.getProductStylesById)
+// app.get('/products/*/style', controls.getProductStylesById)
 
 
 
