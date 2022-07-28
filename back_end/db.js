@@ -23,7 +23,6 @@ db.connectAsync()
   });
 
 //exports
-module.exports = {
-  db
-}
+module.exports = db;
+
 
