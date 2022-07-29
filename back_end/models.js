@@ -124,3 +124,42 @@ exports.retrieveStylesByProductId = (id) => {
 //         ) AS results
 //     FROM products WHERE id=5
 // ) AS products;
+
+
+// SELECT row_to_json(products)
+// FROM (
+//     SELECT
+//     	products.id,
+//         (
+//         	SELECT jsonb_agg(nested_result)
+//         	FROM (
+// 	        	SELECT
+// 				styles.id,
+// 				styles.name,
+// 				styles.sale_price,
+// 				styles.original_price,
+// 				styles.default_price,
+// 				(
+// 					SELECT json_agg(nested_photo)
+// 				    FROM (
+// 				        SELECT
+// 						photos.url,
+// 						photos.thumbnail_url
+// 						FROM photos
+// 						WHERE photos.styleId = styles.productId
+// 					) AS nested_photo
+// 				) As photos,
+// 				(
+// 					SELECT json_object_agg(nested_skus)
+// 				    FROM (
+// 				        SELECT json_object_agg(skus.id, skus.size)
+// 						FROM skus
+// 						WHERE skus.styleId = styles.id
+// 					) AS nested_skus
+// 				) AS skus
+// 		        FROM styles
+// 		        WHERE styles.productId = products.id
+//         	) AS nested_result
+//         ) AS results
+//     FROM products WHERE id=5
+// ) AS products;
