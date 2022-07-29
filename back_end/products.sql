@@ -13,7 +13,7 @@ CREATE TABLE products (
   default_price INT NOT NULL
 );
 
-COPY "products" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/products.csv' DELIMITER ',' CSV HEADER ;
+COPY "products" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/product.csv' DELIMITER ',' CSV HEADER ;
 
 --CREATE INDEX name ON table
 
@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS features;
 CREATE TABLE features (
   id INT NOT NUll,
   product_id INT NOT NULL,
-  feaure VARCHAR(250) NOT NULL,
+  feature VARCHAR(250) NOT NULL,
   value VArCHAR(250) NOT NULL
 );
 

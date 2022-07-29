@@ -22,7 +22,7 @@ exports.getProductById = (req,res) => {
   if(styles < 0){
     models.retrieveProductById(id)
     .then((data)=>{
-      res.send(data[0].rows).status(200).end();
+      res.send(data[0].rows[0].row_to_json).status(200).end();
     })
     .catch((err)=>{
       console.log('There is an error in controllers getProductById: ', err);

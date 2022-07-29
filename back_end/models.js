@@ -17,7 +17,23 @@ exports.retrieveProducts = (count, page) => {
 //query's to find a product by id
 exports.retrieveProductById = (id) => {
   id = id || 1;
-  return db.queryAsync(`SELECT * FROM products WHERE id = $1`, [id])
+  //return db.queryAsync(`SELECT * FROM products WHERE id = $1`, [id])
+  return db.queryAsync(`SELECT row_to_json(products)
+  FROM(
+    SELECT
+        products.*,
+    (
+      SELECT jsonb_agg(nested_feature)
+            FROM(
+        SELECT
+          features.feature,
+        features.value
+              FROM features
+              WHERE features.product_id = products.id
+      ) AS nested_feature
+  ) AS features
+      FROM products WHERE id = $1
+  ) AS products`, [id]);
 }
 
 //query's to find a products styles by id
@@ -25,3 +41,86 @@ exports.retrieveStylesByProductId = (id) => {
   return db.query(`SELECT * FROM styles WHERE productId = $1`, [id])
 }
 
+
+
+
+// SELECT row_to_json(products)
+// FROM (
+//     SELECT
+//     	products.id,
+//         (
+//         	SELECT jsonb_agg(nested_result)
+//         	FROM (
+// 	        	SELECT
+// 				styles.id,
+// 				styles.name,
+// 				styles.sale_price,
+// 				styles.original_price,
+// 				styles.default_price,
+// 				(
+// 					SELECT json_agg(nested_photo)
+// 				    FROM (
+// 				        SELECT
+// 						photos.url,
+// 						photos.thumbnail_url
+// 						FROM photos
+// 						WHERE photos.styleId = products.id
+// 					) AS nested_photo
+// 				) As photos,
+// 				(
+// 					SELECT json_build_object(
+// 					    'skus'
+// 					  )
+// 					)
+// 				    FROM (
+// 				        SELECT
+// 						skus.id
+// 						FROM skus
+// 						WHERE skus.styleId = styles.id
+// 					) AS nested_skus
+// 				) As skus
+// 		        FROM styles
+// 		        WHERE styles.productId = products.id
+//         	) AS nested_result
+//         ) AS results
+//     FROM products WHERE id=5
+// ) AS products;
+
+// SELECT row_to_json(products)
+// FROM (
+//     SELECT
+//     	products.id,
+//         (
+//         	SELECT jsonb_agg(nested_result)
+//         	FROM (
+// 	        	SELECT
+// 				styles.id,
+// 				styles.name,
+// 				styles.sale_price,
+// 				styles.original_price,
+// 				styles.default_price,
+// 				(
+// 					SELECT json_agg(nested_photo)
+// 				    FROM (
+// 				        SELECT
+// 						photos.url,
+// 						photos.thumbnail_url
+// 						FROM photos
+// 						WHERE photos.styleId = styles.productId
+// 					) AS nested_photo
+// 				) As photos,
+// 				(
+// 					SELECT json_agg(nested_skus)
+// 				    FROM (
+// 				        SELECT
+// 						skus.id
+// 						FROM skus
+// 						WHERE skus.styleId = styles.id
+// 					) AS nested_skus
+// 				) AS skus
+// 		        FROM styles
+// 		        WHERE styles.productId = products.id
+//         	) AS nested_result
+//         ) AS results
+//     FROM products WHERE id=5
+// ) AS products;

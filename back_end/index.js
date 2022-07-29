@@ -24,7 +24,7 @@ app.use(express.json());
 //GET /products
 app.get('/products', controls.getProducts)
 
-// // GET /products/:product_id
+// GET: /products/:product_id & GET: /products/:product_id/styles
 // app.get('/products/:product_id', controls.getProductById)
 app.get('/products/*', controls.getProductById)
 
