@@ -1,13 +1,15 @@
 //DB connection lives here:
 const {Client} = require('pg');
 const Promise =  require('bluebird');
+const config = require('../config.js');
+
 
 //connection options:
 const client = new Client({
-  host: "localhost",
-  user: "joseph_shultz",
-  port: "5432",
-  database: "prdovr"
+  host: config.host,
+  user: config.user,
+  port: config.dBport,
+  database: config.database
 })
 
 //turns all connections to db

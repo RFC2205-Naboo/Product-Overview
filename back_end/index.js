@@ -27,7 +27,7 @@ app.use(express.json());
 app.get('/products', controls.getProducts)
 
 // get handling for:  /products/:product_id & GET: /products/:product_id/styles
-app.get('/products/*', controls.getProductById)
+app.get('/products/*', controls.getProductOrStyleById)
 
 
 //server is listening at this port:
