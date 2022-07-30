@@ -1,10 +1,12 @@
+//routes and server setup live here:
+
 //imports:
 const express = require("express");
 const path = require("path");
 const config = require("../config.js");
 const controls = require("./controllers");
 
-//routes and server setup live here:
+
 
 //import: DB connection
 const db = require("./db");
@@ -21,18 +23,13 @@ app.use(express.json());
 
 //ROUTES:
 
-//GET /products
+// get handling for: /products
 app.get('/products', controls.getProducts)
 
-// GET: /products/:product_id & GET: /products/:product_id/styles
-// app.get('/products/:product_id', controls.getProductById)
+// get handling for:  /products/:product_id & GET: /products/:product_id/styles
 app.get('/products/*', controls.getProductById)
 
-// // GET /products/:product_id/styles
-// app.get('/products/*/style', controls.getProductStylesById)
 
-
-
-
+//server is listening at this port:
 app.listen(config.port);
 console.log(`Listening at ${config.ip}`);
