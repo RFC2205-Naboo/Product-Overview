@@ -34,7 +34,7 @@ exports.getProductById = (req,res) => {
     models.retrieveStylesByProductId(id)
     .then((data)=>{
       console.log(data.rows)
-      res.send(data.rows).status(200).end();
+      res.send(data.rows[0].row_to_json).status(200).end();
     })
     .catch((err)=>{
       console.log('There is an error in controllers getProductById: ', err);

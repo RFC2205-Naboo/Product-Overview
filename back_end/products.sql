@@ -65,7 +65,7 @@ CREATE TABLE styles (
   name VARCHAR(250) NOT NULL,
   sale_price TEXT,
   original_price INT NOT NULL,
-  default_price INT NOT NULL
+  default_price BOOLEAN
 );
 
 COPY "styles" FROM '/Users/joseph_shultz/Desktop/Systems Design Capstone/Product-Overview/data/styles.csv' DELIMITER ',' CSV HEADER ;
