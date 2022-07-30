@@ -79,5 +79,18 @@ exports.retrieveStylesByProductId = (id) => {
 ) AS products`, [id]);
 }
 
+//products for testing purposes:
+
+//SELECT * FROM products WHERE id <= 5;
+
+
+//products/id for testing purposes:
+
+// SELECT row_to_json(products) FROM(SELECT products.*, (SELECT jsonb_agg(nested_feature) FROM(SELECT features.feature,features.value FROM features WHERE features.product_id = products.id) AS nested_feature) AS features FROM products WHERE id = 5) AS products;
+
+
+
+//products/id/styles for testing purposes:
+
 // SELECT row_to_json(products) FROM (SELECT products.id AS product_id,(SELECT jsonb_agg(nested_result) FROM (SELECT styles.id, styles.name, styles.sale_price, styles.original_price, styles.default_price AS default$, (SELECT json_agg(nested_photo) FROM (SELECT photos.url, photos.thumbnail_url FROM photos WHERE photos.styleId = styles.productId) AS nested_photo) As photos, (SELECT json_object_agg(nested_skus) FROM(SELECT json_object_agg(skus.id, json_build_object('quantity', skus.quantity, 'size', skus.size)) FROM skus WHERE skus.styleId = styles.id) AS nested_skus) AS skus FROM styles WHERE styles.productId = products.id) AS nested_result) AS results FROM products WHERE id = 5) AS products;
 
