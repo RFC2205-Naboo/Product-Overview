@@ -31,5 +31,5 @@ app.get('/products/*', controls.getProductOrStyleById)
 
 
 //server is listening at this port:
-app.listen(config.port);
+app.listen(config.srvPort);
 console.log(`Listening at ${config.ip}`);
