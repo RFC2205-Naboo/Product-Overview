@@ -8,6 +8,7 @@ const config = require('../config.js');
 const client = new Client({
   host: config.host,
   user: config.user,
+  password: config.password,
   port: config.dbPort,
   database: config.database
 })
